@@ -1,7 +1,7 @@
 # Example file showing a basic pygame "game loop"
 import pygame
 from scenes import titlescreen
-from singletons.singletons import screenX, screenY, gameState, GameState
+from singletons.singletons import screenX, screenY, gameState, GameState, renderer
 
 # pygame setup
 pygame.init()
@@ -23,6 +23,8 @@ while running:
         pass
     elif gameState == GameState.ENDINGSCREEN:
         pass
+
+    renderer.draw()
 
     # flip() the display to put your work on screen
     pygame.display.flip()
