@@ -1,9 +1,11 @@
 # Example file showing a basic pygame "game loop"
 import pygame
+from scenes import titlescreen
+from singletons.singletons import screenX, screenY, gameState
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+screen = pygame.display.set_mode((screenX, screenY))
 clock = pygame.time.Clock()
 running = True
 
@@ -14,10 +16,13 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
-
     # RENDER YOUR GAME HERE
+    if gameState == 1:
+        titlescreen.init()
+    elif gameState == 2:
+        pass
+    elif gameState == 3:
+        pass
 
     # flip() the display to put your work on screen
     pygame.display.flip()
