@@ -9,7 +9,7 @@ class GameState(Enum):
     GAME = 2
     ENDINGSCREEN = 3
 
-gameState = GameState.TITLESCREEN
+gameState = GameState.GAME
 
 uiManager = None
 
