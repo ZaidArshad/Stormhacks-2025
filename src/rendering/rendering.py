@@ -91,8 +91,7 @@ class Renderer:
             return
         
     def toggle_notebook_view(self):
-        self.delta_fade_opacity = 10
-        self.triggered_view = "notebook"
+        self.is_notebook_view = not self.is_notebook_view
 
     def toggle_laptop_view(self):
         self.delta_fade_opacity = 10
@@ -105,8 +104,6 @@ class Renderer:
 
     def fade(self):
         if (self.fade_opacity == 255):
-            if self.triggered_view == "notebook":
-                self.is_notebook_view = not self.is_notebook_view
             if self.triggered_view == "laptop":
                 self.is_laptop_view = not self.is_laptop_view
             self.delta_fade_opacity = -10
