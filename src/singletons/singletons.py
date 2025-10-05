@@ -14,3 +14,5 @@ gameState = GameState.TITLESCREEN
 uiManager = None
 
 renderer = None
+
+running = False
