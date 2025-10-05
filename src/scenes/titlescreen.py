@@ -21,6 +21,7 @@ def shutdownGame():
 def startGame():
     print("starting game")
     game.state = GameState.GAME
+    game.input_delay = 0
     renderer.set_elements(mainscreen.PrepareGUIElements(renderer, uiEvtManager))
 
 def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):

@@ -14,15 +14,22 @@ player = None
 
 def laptopClick():
     print("laptop click")
+    if game.input_delay > 1:
+        renderer.toggle_laptop_view()
+        game.input_delay = 0
 
 def bookClick():
     print("book click")
+    if game.input_delay > 1:
+        renderer.toggle_notebook_view()
+        game.input_delay = 0
 
 def redbullClick():
     print("redbull click")
 
 def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
     ''''''
+
     global laptop, book, redbull, player
     relpath = pathlib.Path( "assets" ) / "placeholder" 
     bg_rect = renderer.get_background().get_rect()
@@ -56,8 +63,12 @@ def Exec(events : list[pygame.event.Event]):
              game.running = False
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
+            if event.key == pygame.K_ESCAPE and not renderer.get_is_laptop_view():
                 game.running = False
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if renderer.get_is_laptop_view():
+                laptopClick()
 
         mouse_pos = pygame.mouse.get_pos()
         renderer.set_camera_offset(*mouse_pos)

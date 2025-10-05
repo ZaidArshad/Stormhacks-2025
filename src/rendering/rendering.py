@@ -4,8 +4,6 @@ from pathlib import Path
 
 OFFSET_X_SCALE = 10
 OFFSET_Y_SCALE = 10
-LAPTOP_VIEW_MARGIN_X = 100
-LAPTOP_VIEW_MARGIN_Y = 100
 
 class Renderer:
     def __init__(self):
@@ -15,9 +13,11 @@ class Renderer:
             (self.screen.get_width()+200, self.screen.get_height()+100))
         self.background = pygame.Surface((self.screen.get_width()+200, self.screen.get_height()+100))
 
-        self.laptop_view = pygame.Surface((self.screen.get_width()-LAPTOP_VIEW_MARGIN_X, 
-                                          self.screen.get_height()-LAPTOP_VIEW_MARGIN_Y))
-        self.laptop_view.fill("blue")
+        self.laptop_view = pygame.transform.scale(pygame.image.load(Path('assets/placeholder/laptopZoomed.png')).convert_alpha(),
+                                                  (self.screen.get_width()+200, self.screen.get_height()+100))
+        
+        self.notebook_view = pygame.transform.scale(pygame.image.load(Path('assets/placeholder/homeworkZoomed.png')).convert_alpha(),
+                                                  (self.screen.get_width()+200, self.screen.get_height()+100))
 
         self.fade_view = pygame.Surface(self.get_screen_size(), pygame.SRCALPHA)
         self.fade_view.fill("black")
@@ -28,6 +28,8 @@ class Renderer:
         self.delta_fade_opacity = 0
 
         self.is_laptop_view = False
+        self.is_notebook_view = False
+        self.triggered_view = ""
 
     def get_screen_size(self):
         return (self.screen.get_width(), self.screen.get_height())
@@ -35,7 +37,9 @@ class Renderer:
     def set_camera_offset(self, mouse_x, mouse_y):
         self.x_offset = (self.background.get_width()//2-mouse_x)/OFFSET_X_SCALE - 100
         self.y_offset = (self.background.get_height()//2-mouse_y)/OFFSET_Y_SCALE - 50
-
+        
+    def get_is_laptop_view(self):
+        return self.is_laptop_view
 
     def add_element(self, element):
         self.elements.append(element)
@@ -53,8 +57,10 @@ class Renderer:
     def draw(self):
         self.screen.fill("black")
 
-        if self.is_laptop_view:
-            self.screen.blit(self.laptop_view, (self.x_offset+LAPTOP_VIEW_MARGIN_X/2, self.y_offset+LAPTOP_VIEW_MARGIN_Y/2))
+        if self.is_notebook_view:
+            self.screen.blit(self.notebook_view, (self.x_offset, self.y_offset))
+        elif self.is_laptop_view:
+            self.screen.blit(self.laptop_view, (self.x_offset, self.y_offset))
         else:
             self.background.blit(self.bg_image, (0, 0))
             for element in self.elements:
@@ -69,13 +75,20 @@ class Renderer:
             self.fade()
             return
         
+    def toggle_notebook_view(self):
+        self.delta_fade_opacity = 10
+        self.triggered_view = "notebook"
 
     def toggle_laptop_view(self):
-        self.delta_fade_opacity = 10
+        self.delta_fade_opacity = 103
+        self.triggered_view = "laptop"
 
     def fade(self):
         if (self.fade_opacity == 255):
-            self.is_laptop_view = not self.is_laptop_view
+            if self.triggered_view == "notebook":
+                self.is_notebook_view = not self.is_notebook_view
+            if self.triggered_view == "laptop":
+                self.is_laptop_view = not self.is_laptop_view
             self.delta_fade_opacity = -10
         self.fade_opacity = max(0, min(self.fade_opacity+self.delta_fade_opacity, 255))
         self.fade_view.fill((0, 0, 0, self.fade_opacity))

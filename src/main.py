@@ -13,6 +13,7 @@ renderer.set_elements(titlescreen.PrepareGUIElements(renderer, uiEvtManager))
 
 while game.running:
     time_delta = clock.tick(60)/1000.0
+    game.input_delay += time_delta
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
     # for event in pygame.event.get():

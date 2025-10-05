@@ -15,6 +15,7 @@ class Game():
     laptop_interaction = 0
     notebook_interaction = 0
     redbull_interaction = 0
+    input_delay = 0
 
 game = Game()
 
