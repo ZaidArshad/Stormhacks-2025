@@ -13,7 +13,15 @@ class Renderer:
             (self.screen.get_width()+200, self.screen.get_height()+100))
         self.background = pygame.Surface((self.screen.get_width()+200, self.screen.get_height()+100))
 
-        self.laptop_view = pygame.transform.scale(pygame.image.load(Path('assets/placeholder/laptopZoomed.png')).convert_alpha(),
+        self.laptop_view_paths = ["assets/final/zoomed_laptop_states/interaction_1_0.png",
+                                  "assets/final/zoomed_laptop_states/interaction_1_1.png",
+                                  "assets/final/zoomed_laptop_states/interaction_1_2.png",
+                                  "assets/final/zoomed_laptop_states/interaction_2_0.png",
+                                  "assets/final/zoomed_laptop_states/interaction_3_0.png",
+                                  "assets/final/zoomed_laptop_states/interaction_3_1.png",
+                                  "assets/final/zoomed_laptop_states/interaction_4_0.png",
+                                  "assets/final/zoomed_laptop_states/interaction_4_1.png"] 
+        self.laptop_view = pygame.transform.scale(pygame.image.load(Path(self.laptop_view_paths[0])).convert_alpha(),
                                                   (self.screen.get_width()+200, self.screen.get_height()+100))
         
         self.notebook_view = pygame.transform.scale(pygame.image.load(Path('assets/placeholder/homeworkZoomed.png')).convert_alpha(),
@@ -80,8 +88,12 @@ class Renderer:
         self.triggered_view = "notebook"
 
     def toggle_laptop_view(self):
-        self.delta_fade_opacity = 103
+        self.delta_fade_opacity = 10
         self.triggered_view = "laptop"
+
+    def set_laptop_view_num(self, view_num):
+        self.laptop_view = pygame.transform.scale(pygame.image.load(Path(self.laptop_view_paths[view_num])).convert_alpha(),
+                                                  (self.screen.get_width()+200, self.screen.get_height()+100))
 
     def fade(self):
         if (self.fade_opacity == 255):
