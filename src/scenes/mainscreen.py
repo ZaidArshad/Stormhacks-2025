@@ -9,6 +9,8 @@ from uiElements.TextObject import TextObject
 from uiElements.dialogueWithChoices import DialogueWithChoice
 from player.player import Player
 from scenes import endingscreen
+from uiElements.TextObject import TextObject
+from uiElements.dialogueWithChoices import DialogueWithChoice
 
 laptop = None
 book = None
@@ -22,6 +24,9 @@ def laptopClick():
             renderer.toggle_laptop_view()
         else:
            renderer.increment_laptop_view_num()
+        if game.laptop_interaction == 10:
+            notebook_sound = pygame.mixer.Sound(Path("assets/sound_effects/windowsError.wav"))
+            notebook_sound.play()
         if game.laptop_interaction in [4, 6, 9]:
             renderer.increment_laptop_view_num()
         if game.laptop_interaction in [3, 5, 8]:
@@ -116,11 +121,11 @@ def Exec(events : list[pygame.event.Event]):
 
 def go_home():
     game.state = GameState.ENDINGSCREEN
-    renderer.set_elements(endingscreen.PrepareGUIElements(renderer, uiEvtManager))
     uiEvtManager.clear()
+    renderer.set_elements(endingscreen.PrepareGUIElements(renderer, uiEvtManager))
 
 def nothing():
-    pass
+    return
     
 
 # def testCallback():
