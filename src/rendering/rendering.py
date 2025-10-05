@@ -37,6 +37,13 @@ class Renderer:
     def add_element(self, element):
         self.elements.append(element)
 
+    def set_elements(self, elements):
+        self.elements.clear()
+        self.elements = elements
+
+    def get_screen(self):
+        return self.screen
+
     def draw(self):
         self.screen.fill("black")
 

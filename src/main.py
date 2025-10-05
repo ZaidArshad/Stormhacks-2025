@@ -2,16 +2,18 @@
 import pygame
 import pygame_gui
 from scenes import titlescreen
+from rendering.rendering import Renderer
 from singletons.singletons import screenX, screenY, gameState, uiManager, GameState, renderer
 
 # pygame setup
 pygame.init()
 screen = pygame.display.set_mode((screenX, screenY))
 clock = pygame.time.Clock()
-running = True
 uiManager = pygame_gui.UIManager((screenX, screenY)) 
+renderer = Renderer()
+running = True
 
-titlescreen.Draw()
+renderer.set_elements(titlescreen.PrepareGUIElements())
 
 while running:
     time_delta = clock.tick(60)/1000.0
@@ -22,16 +24,17 @@ while running:
             running = False
 
     if gameState == GameState.TITLESCREEN:
-        titlescreen.Exec()
+        pass
+        # titlescreen.Exec()
     elif gameState == GameState.GAME:
         pass
     elif gameState == GameState.ENDINGSCREEN:
         pass
 
+    uiManager.draw_ui(renderer.get_screen())
+    uiManager.update(time_delta)
     renderer.draw()
-
-    # flip() the display to put your work on screen
-    pygame.display.flip()
+    pygame.display.update()
 
     clock.tick(60)  # limits FPS to 60
 
