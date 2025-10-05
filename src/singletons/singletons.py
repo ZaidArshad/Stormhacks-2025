@@ -1,20 +1,20 @@
 from enum import Enum
-# screen size
-screenX = 1920
-screenY = 1080
+from rendering.rendering import Renderer 
 
-# game state
 class GameState(Enum):
     TITLESCREEN = 1
     GAME = 2
     ENDINGSCREEN = 3
 
-gameState = GameState.TITLESCREEN
+# game state
+class Game():
+    state = GameState.TITLESCREEN
+    running = True
+
+game = Game()
 
 uiManager = None
 
-renderer = None
-
-running = False
+renderer = Renderer()
 
 uiEvtManager = None

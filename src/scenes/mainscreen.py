@@ -1,9 +1,9 @@
 import pygame
 import pathlib
+from singletons.singletons import game, renderer
 from rendering.rendering import Renderer
 from uiElements.button import Button
 from uiElements.baseUIElement import baseUIElement
-from singletons.singletons import running
 
 laptop = None
 book = None
@@ -33,16 +33,20 @@ def Init():
 
 def Exec():
     ''''''
-    global running
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            game.running = False
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                exit()
+                game.running = False
 
         mouse_pos = pygame.mouse.get_pos()
-        laptop.check_hovered(mouse_pos)
-        book.check_hovered(mouse_pos)
-        redbull.check_hovered(mouse_pos)
+        renderer.set_camera_offset(*mouse_pos)
+
+        if laptop:
+            laptop.check_hovered(mouse_pos)
+        if book:
+            book.check_hovered(mouse_pos)
+        if redbull:
+            redbull.check_hovered(mouse_pos)

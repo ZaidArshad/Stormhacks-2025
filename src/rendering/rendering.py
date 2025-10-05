@@ -64,8 +64,7 @@ class Renderer:
                     element.collideRect[0] = pos[0]+self.x_offset
                     element.collideRect[1] = pos[1]+self.y_offset
             self.screen.blit(self.background, (self.x_offset, self.y_offset))
-            print(self.x_offset, self.y_offset)
-
+            
         if self.delta_fade_opacity != 0:
             self.fade()
             return
