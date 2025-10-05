@@ -62,4 +62,3 @@ def Exec(events : list[pygame.event.Event]):
             start_button.check_hovered(mouse_pos)
         if quit_button:
             quit_button.check_hovered(mouse_pos)
-

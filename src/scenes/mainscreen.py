@@ -1,10 +1,12 @@
 import pygame
 import pathlib
-from singletons.singletons import game, renderer
+from pathlib import Path
+from singletons.singletons import game, renderer, uiEvtManager
 from rendering.rendering import Renderer
 from uiElements.uiEvtManager import UiEventManager
 from uiElements.button import Button
-from uiElements.baseUIElement import baseUIElement
+from uiElements.dialogueWithChoices import DialogueWithChoice
+from uiElements.TextObject import TextObject
 from player.player import Player
 
 laptop = None
@@ -54,6 +56,12 @@ def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
                      buttonAssetUri= relpath / "final_redCow.png",
                      buttonHoverAssetUri= relpath / "final_redCow_hover.png", callback=redbullClick)
     
+    # questionText = TextObject("question?", Path("assets\Tox Typewriter.ttf"), 30, (255,255,255), (200, 165))
+    # ansOneText = TextObject("a. opt a", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+    # ansTwoText = TextObject("b. opt b", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+    # ansThreeText = TextObject("c. opt c", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+    # debugChoiceMenu = DialogueWithChoice(300, bg_rect.centery+100, buttonAssetUri=Path("assets/UI/dialog_bubble_mc.png"), questionText=questionText, optionOneText=ansOneText, optionTwoText=ansTwoText, optionThreeText=ansThreeText, optOneCallback=testCallback, optTwoCallback=testCallback2, optThreeCallback=testCallback3)
+
     uiEvtManager.register(laptop)
     uiEvtManager.register(book)
     uiEvtManager.register(redbull)
@@ -61,8 +69,8 @@ def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
     player = Player()
     # menu interaction btns
 
+    # return [laptop, book, redbull, debugChoiceMenu]
     return [laptop, book, redbull]
-
 
 def Init():
     ''''''
@@ -92,3 +100,12 @@ def Exec(events : list[pygame.event.Event]):
             book.check_hovered(mouse_pos)
         if redbull:
             redbull.check_hovered(mouse_pos)
+
+# def testCallback():
+#     print("1")
+
+# def testCallback2():
+#     print("2")
+
+# def testCallback3():
+#     print("3")
