@@ -29,8 +29,9 @@ class UiEventManager:
                         if uielement.is_clicked(pos): 
                             uielement.execCallback()
                 elif self.locking_element != None and game.dialogue_lock:
-                    if self.locking_element.is_clicked(pos): 
-                        self.locking_element.execCallback()
+                    for lock in self.locking_element:
+                        if lock.is_clicked(pos): 
+                            lock.execCallback()
 
             for uielement in self.activeUIElements:          
                 uielement.check_hovered(pos)
