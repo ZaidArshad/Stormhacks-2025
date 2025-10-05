@@ -3,7 +3,7 @@ class baseUIElement:
 
     def __init__(self, x, y, buttonAssetUri = None, surface = None):
         if buttonAssetUri != None:
-            self.image = pygame.image.load(buttonAssetUri).convert()
+            self.image = pygame.image.load(buttonAssetUri).convert_alpha()
         elif surface != None:
             self.image = surface
         self.position = (x, y)

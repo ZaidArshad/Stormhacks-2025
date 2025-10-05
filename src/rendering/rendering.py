@@ -2,8 +2,8 @@ import pygame
 from uiElements.baseUIElement import baseUIElement
 import math
 
-OFFSET_X_SCALE = 4
-OFFSET_Y_SCALE = 4
+OFFSET_X_SCALE = 10
+OFFSET_Y_SCALE = 10
 LAPTOP_VIEW_MARGIN_X = 100
 LAPTOP_VIEW_MARGIN_Y = 100
 
@@ -11,8 +11,9 @@ class Renderer:
     def __init__(self):
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.elements: list[baseUIElement] = []
-        self.background = pygame.Surface(self.get_screen_size())
-        self.background.fill("red")
+        self.background = pygame.transform.scale( 
+            pygame.image.load('assets/placeholder/main_bg.png').convert(),
+            (self.screen.get_width()+200, self.screen.get_height()+100))
 
         self.laptop_view = pygame.Surface((self.screen.get_width()-LAPTOP_VIEW_MARGIN_X, 
                                           self.screen.get_height()-LAPTOP_VIEW_MARGIN_Y))
@@ -32,8 +33,8 @@ class Renderer:
         return (self.screen.get_width(), self.screen.get_height())
 
     def set_camera_offset(self, mouse_x, mouse_y):
-        self.x_offset = (self.background.get_width()//2-mouse_x)/OFFSET_X_SCALE
-        self.y_offset = (self.background.get_height()//2-mouse_y)/OFFSET_Y_SCALE
+        self.x_offset = (self.background.get_width()//2-mouse_x)/OFFSET_X_SCALE - 100
+        self.y_offset = (self.background.get_height()//2-mouse_y)/OFFSET_Y_SCALE - 50
 
     def add_element(self, element):
         self.elements.append(element)
@@ -43,7 +44,10 @@ class Renderer:
         self.elements = elements
 
     def get_screen(self):
-        return self.screen
+        return self.background
+    
+    def get_background(self):
+        return self.background
 
     def draw(self):
         self.screen.fill("black")
