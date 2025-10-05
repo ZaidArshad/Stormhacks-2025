@@ -35,6 +35,7 @@ def bookClick():
         renderer.toggle_notebook_view()
         notebook_sound = pygame.mixer.Sound(Path("assets/sound_effects/notebookFlipping.wav"))
         notebook_sound.play()
+        player.do_homework()
         game.input_delay = 0
 
 def redbullClick():

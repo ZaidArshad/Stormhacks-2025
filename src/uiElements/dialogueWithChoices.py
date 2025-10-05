@@ -13,7 +13,7 @@ class DialogueWithChoice(baseUIElement):
         if optionOneText != None:
             size = optionOneText.getCompiled().get_size()
             transparent_surface = pygame.Surface((size[0] + 15, size[1] + 15), pygame.SRCALPHA)
-            btnOne = Button(0,0, surface= transparent_surface, buttonHoverAssetUri= Path("assets/UI/hover/startGameHover.png"),  TextObject=optionOneText, callback= self.unlockCallback)
+            btnOne = Button(0,0, surface= transparent_surface,  TextObject=optionOneText, callback= self.unlockCallback)
             btnRect = btnOne.getSurface().get_rect()
             btnRect.topleft = (self.image.get_rect().topleft[0] + 200, self.image.get_rect().topleft[1] + 215)
             btnOne.collideRect.topleft = (300, 830)
@@ -23,7 +23,7 @@ class DialogueWithChoice(baseUIElement):
         if optionTwoText != None:
             size = optionTwoText.getCompiled().get_size()
             transparent_surface = pygame.Surface((size[0] + 15, size[1] + 15), pygame.SRCALPHA)
-            btnTwo = Button(0,0, surface= transparent_surface, buttonHoverAssetUri= Path("assets/UI/hover/startGameHover.png"),  TextObject=optionTwoText, callback=self.unlockCallback2)
+            btnTwo = Button(0,0, surface= transparent_surface,  TextObject=optionTwoText, callback=self.unlockCallback2)
             btnRect = btnTwo.getSurface().get_rect()
             btnRect.topleft = (self.image.get_rect().topleft[0] + 200, self.image.get_rect().topleft[1] + 255)
             btnTwo.collideRect.topleft = (300, 870)
@@ -33,7 +33,7 @@ class DialogueWithChoice(baseUIElement):
         if optionThreeText != None:
             size = optionThreeText.getCompiled().get_size()
             transparent_surface = pygame.Surface((size[0] + 15, size[1] + 15), pygame.SRCALPHA)
-            btnThree = Button(0,0, surface= transparent_surface, buttonHoverAssetUri= Path("assets/UI/hover/startGameHover.png"),  TextObject=optionThreeText, callback=self.unlockCallback3)
+            btnThree = Button(0,0, surface= transparent_surface,  TextObject=optionThreeText, callback=self.unlockCallback3)
             btnRect = btnThree.getSurface().get_rect()
             btnRect.topleft = (self.image.get_rect().topleft[0] + 200, self.image.get_rect().topleft[1] + 295)
             btnThree.collideRect.topleft = (300, 910)
