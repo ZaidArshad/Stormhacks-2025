@@ -2,9 +2,10 @@ from singletons.singletons import game, GameState, renderer
 import pygame
 from pathlib import Path
 from uiElements.baseUIElement import baseUIElement 
-# from uiElements.LockingButton import LockingButton
+from uiElements.dialogueWithChoices import DialogueWithChoice
 from uiElements.TextObject import TextObject
 from uiElements.LockingButton import LockingButton
+
 
 class Player:
     def __init__(self):
@@ -46,10 +47,8 @@ class Player:
         if game.redbull_interaction < 3:
             redbull_sound.play()
         bg_rect = renderer.get_background().get_rect()
-        print(game.redbull_interaction)
         if game.redbull_interaction == 0:
             LockingButton(300, bg_rect.centery + 100, Path("assets/UI/dialog_bubble_regular.png"), TextObject= TextObject("I feel a bit more awake", Path("assets/Tox Typewriter.ttf"), 30, (255, 255, 255), (150, 150)))
-            pass
         if game.redbull_interaction == 1:
             LockingButton(300, bg_rect.centery + 100, Path("assets/UI/dialog_bubble_regular.png"), TextObject= TextObject("This is helping... just a little. But I'm a bit shaky.", Path("assets/Tox Typewriter.ttf"), 30, (255, 255, 255), (150, 150)))
             self.lower_sanity(5)
@@ -59,3 +58,13 @@ class Player:
         game.redbull_interaction += 1
         print(game.redbull_interaction)
     
+    def do_homework(self):
+        bg_rect = renderer.get_background().get_rect()
+        if game.notebook_interaction == 0:
+            LockingButton(300, bg_rect.centery + 100, Path("assets/UI/dialog_bubble_regular.png"), TextObject= TextObject("my brain just won't process anything now. Everything's noise...", Path("assets/Tox Typewriter.ttf"), 30, (255, 255, 255), (150, 150)))
+        if game.notebook_interaction == 1:    
+            pass
+        if game.notebook_interaction == 2: 
+            pass
+        game.notebook_interaction += 1
+        print(game.notebook_interaction)        
