@@ -34,7 +34,7 @@ class Player:
             renderer.add_element(bloody_bull)
         if self.sanity <= 35 and not self.hallucination[5]:
             self.hallucination[5] = True
-            laptop_flash = baseUIElement(bg_rect.centerx-815, bg_rect.centery-270, surface= pygame.image.load(Path('assets/final/final_san35_overlay.png')).convert_alpha())
+            laptop_flash = baseUIElement(bg_rect.centerx-750, bg_rect.centery-270, surface= pygame.image.load(Path('assets/final/final_san35_overlay.png')).convert_alpha())
             renderer.add_element(laptop_flash)
             red_aura = baseUIElement(0, 0, surface= pygame.image.load(Path('assets/final/final_large_overlay.png')).convert_alpha())
             renderer.add_element(red_aura)
