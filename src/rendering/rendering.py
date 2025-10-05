@@ -1,4 +1,5 @@
 import pygame
+import math
 
 OFFSET_X_SCALE = 4
 OFFSET_Y_SCALE = 4
@@ -16,10 +17,13 @@ class Renderer:
                                           self.screen.get_height()-LAPTOP_VIEW_MARGIN_Y))
         self.laptop_view.fill("blue")
 
+        self.fade_view = pygame.Surface(self.get_screen_size(), pygame.SRCALPHA)
+        self.fade_view.fill("black")
+
         self.x_offset = 0
         self.y_offset = 0
         self.fade_opacity = 0
-        self.delta_opacity = 0
+        self.delta_fade_opacity = 0
 
         self.is_laptop_view = False
 
@@ -36,10 +40,6 @@ class Renderer:
     def draw(self):
         self.screen.fill("black")
 
-        if self.fade_opacity != 0:
-            self.fade()
-            return
-
         if self.is_laptop_view:
             self.screen.blit(self.laptop_view, (self.x_offset+LAPTOP_VIEW_MARGIN_X/2, self.y_offset+LAPTOP_VIEW_MARGIN_Y/2))
         else:
@@ -47,9 +47,20 @@ class Renderer:
                 self.background.blit(element, (0, 0))
             self.screen.blit(self.background, (self.x_offset, self.y_offset))
 
+        if self.delta_fade_opacity != 0:
+            self.fade()
+            return
+        
+
     def toggle_laptop_view(self):
-        self.is_laptop_view = not self.is_laptop_view
-        self.fade_opacity = 1
+        self.delta_fade_opacity = 10
 
     def fade(self):
-        self.screen.fill((0, 0, 0, self.fade_opacity))
+        if (self.fade_opacity == 255):
+            self.is_laptop_view = not self.is_laptop_view
+            self.delta_fade_opacity = -10
+        self.fade_opacity = max(0, min(self.fade_opacity+self.delta_fade_opacity, 255))
+        self.fade_view.fill((0, 0, 0, self.fade_opacity))
+        self.screen.blit(self.fade_view, (0, 0))
+        if (self.fade_opacity == 0):
+            self.delta_fade_opacity = 0
