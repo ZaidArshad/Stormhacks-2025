@@ -17,7 +17,7 @@ class UiEventManager:
 
     def clear(self):
         self.activeUIElements.clear()
-        self.clearLockimg()
+        self.clearLocking()
 
     def process(self, events: list[pygame.event.Event]):
         for event in events:
