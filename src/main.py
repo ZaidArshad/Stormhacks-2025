@@ -1,7 +1,7 @@
 # Example file showing a basic pygame "game loop"
 import pygame
 from scenes import titlescreen, mainscreen, endingscreen
-from singletons.singletons import GameState, renderer, uiEvtManager, game, uiManager
+from singletons.singletons import GameState, renderer, uiEvtManager, game
 
 # pygame setup
 running = True

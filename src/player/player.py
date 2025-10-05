@@ -2,6 +2,9 @@ from singletons.singletons import game, GameState, renderer
 import pygame
 from pathlib import Path
 from uiElements.baseUIElement import baseUIElement 
+# from uiElements.LockingButton import LockingButton
+from uiElements.TextObject import TextObject
+from uiElements.LockingButton import LockingButton
 
 class Player:
     def __init__(self):
@@ -42,9 +45,16 @@ class Player:
         redbull_sound = pygame.mixer.Sound(Path("assets/sound_effects/drinkRedbull.wav"))
         if game.redbull_interaction < 3:
             redbull_sound.play()
+        bg_rect = renderer.get_background().get_rect()
+        print(game.redbull_interaction)
+        if game.redbull_interaction == 0:
+            LockingButton(300, bg_rect.centery + 100, Path("assets/UI/dialog_bubble_regular.png"), TextObject= TextObject("I feel a bit more awake", Path("assets/Tox Typewriter.ttf"), 30, (255, 255, 255), (150, 150)))
+            pass
         if game.redbull_interaction == 1:
+            LockingButton(300, bg_rect.centery + 100, Path("assets/UI/dialog_bubble_regular.png"), TextObject= TextObject("This is helping... just a little. But I'm a bit shaky.", Path("assets/Tox Typewriter.ttf"), 30, (255, 255, 255), (150, 150)))
             self.lower_sanity(5)
         if game.redbull_interaction == 2:
+            LockingButton(300, bg_rect.centery + 100, Path("assets/UI/dialog_bubble_regular.png"), TextObject= TextObject("That was my last sip.", Path("assets/Tox Typewriter.ttf"), 30, (255, 255, 255), (150, 150)))
             self.lower_sanity(10)
         game.redbull_interaction += 1
         print(game.redbull_interaction)
