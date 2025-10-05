@@ -23,5 +23,7 @@ class Button(baseUIElement):
             self.image = self.baseImage
 
     def is_clicked(self, pos):
-        self.callback()
         return self.collideRect.collidepoint(pos)
+    
+    def execCallback(self):
+        return self.callback()

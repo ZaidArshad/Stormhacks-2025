@@ -1,15 +1,18 @@
 # Example file showing a basic pygame "game loop"
 import pygame
 from scenes import titlescreen, mainscreen
+from uiElements.uiEvtManager import UiEventManager
 from rendering.rendering import Renderer
-from singletons.singletons import gameState, GameState, renderer, running
+from singletons.singletons import gameState, GameState, renderer, running, uiEvtManager
 
 # pygame setup
 running = True
 pygame.init()
 clock = pygame.time.Clock()
 renderer = Renderer()
-renderer.set_elements(mainscreen.PrepareGUIElements(renderer))
+uiEvtManager = UiEventManager()
+renderer.set_elements(titlescreen.PrepareGUIElements(renderer, uiEvtManager))
+
 
 while running:
     time_delta = clock.tick(60)/1000.0
@@ -30,7 +33,9 @@ while running:
     elif gameState == GameState.ENDINGSCREEN:
         pass
 
-    renderer.set_camera_offset(*pygame.mouse.get_pos())
+    uiEvtManager.process()
+
+    #renderer.set_camera_offset(*pygame.mouse.get_pos())
 
     renderer.draw()
     pygame.display.flip()
