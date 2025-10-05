@@ -26,6 +26,9 @@ def bookClick():
 
 def redbullClick():
     print("redbull click")
+    if game.input_delay > 1:
+        player.drink_redbull()
+        game.input_delay = 0
 
 def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
     ''''''

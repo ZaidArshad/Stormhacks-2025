@@ -34,5 +34,13 @@ class Player:
             pass
             # game.state = GameState.ENDINGSCREEN
 
-    
+    def drink_redbull(self):
+        if game.redbull_interaction == 0:
+            pass
+        if game.redbull_interaction == 1:
+            self.lower_sanity(5)
+        if game.redbull_interaction == 2:
+            self.lower_sanity(10)
+        game.redbull_interaction += 1
+        print(game.redbull_interaction)
     
