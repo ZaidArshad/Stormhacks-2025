@@ -1,13 +1,14 @@
 import pygame
 import pathlib
 from pathlib import Path
-from singletons.singletons import game, renderer, uiEvtManager
+from singletons.singletons import game, renderer, uiEvtManager, GameState
 from rendering.rendering import Renderer
 from uiElements.uiEvtManager import UiEventManager
 from uiElements.button import Button
 from uiElements.dialogueWithChoices import DialogueWithChoice
 from uiElements.TextObject import TextObject
 from player.player import Player
+from scenes import endingscreen
 
 laptop = None
 book = None
@@ -32,6 +33,8 @@ def bookClick():
     print("book click")
     if game.input_delay > 1:
         renderer.toggle_notebook_view()
+        notebook_sound = pygame.mixer.Sound(Path("assets/sound_effects/notebookFlipping.wav"))
+        notebook_sound.play()
         game.input_delay = 0
 
 def redbullClick():
@@ -89,8 +92,19 @@ def Exec(events : list[pygame.event.Event]):
             if renderer.get_is_laptop_view():
                 laptopClick()
 
+            if renderer.get_is_notebook_view():
+                bookClick()
+
         mouse_pos = pygame.mouse.get_pos()
         renderer.set_camera_offset(*mouse_pos)
+
+        if game.time_elapsed >= 300:
+            questionText = TextObject("My battery is running low... Should I charge my laptop?", Path("assets\Tox Typewriter.ttf"), 30, (255,255,255), (200, 165))
+            ansOneText = TextObject("a. yes", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+            ansTwoText = TextObject("b. no", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+            debugChoiceMenu = DialogueWithChoice(300, renderer.get_screen().get_rect().centery+100, buttonAssetUri=Path("assets/UI/dialog_bubble_mc.png"), questionText=questionText,
+                                                 optionOneText=ansOneText, optionTwoText=ansTwoText, optOneCallback=go_home, optTwoCallback=nothing)
+            renderer.add_element(debugChoiceMenu)
 
         if laptop:
             laptop.check_hovered(mouse_pos)
@@ -98,6 +112,15 @@ def Exec(events : list[pygame.event.Event]):
             book.check_hovered(mouse_pos)
         if redbull:
             redbull.check_hovered(mouse_pos)
+
+def go_home():
+    game.state = GameState.ENDINGSCREEN
+    renderer.set_elements(endingscreen.PrepareGUIElements(renderer, uiEvtManager))
+    uiEvtManager.clear()
+
+def nothing():
+    pass
+    
 
 # def testCallback():
 #     print("1")

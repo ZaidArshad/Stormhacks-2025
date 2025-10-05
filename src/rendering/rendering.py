@@ -49,6 +49,9 @@ class Renderer:
         
     def get_is_laptop_view(self):
         return self.is_laptop_view
+    
+    def get_is_notebook_view(self):
+        return self.is_notebook_view
 
     def add_element(self, element):
         self.elements.append(element)
