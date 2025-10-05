@@ -106,11 +106,12 @@ def Exec(events : list[pygame.event.Event]):
         renderer.set_camera_offset(*mouse_pos)
 
         if game.time_elapsed >= 300:
+            bg_rect = renderer.get_background().get_rect()
             questionText = TextObject("My battery is running low... Should I charge my laptop?", Path("assets\Tox Typewriter.ttf"), 30, (255,255,255), (200, 165))
-            ansOneText = TextObject("a. yes", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
-            ansTwoText = TextObject("b. no", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
-            debugChoiceMenu = DialogueWithChoice(300, renderer.get_screen().get_rect().centery+100, buttonAssetUri=Path("assets/UI/dialog_bubble_mc.png"), questionText=questionText,
-                                                 optionOneText=ansOneText, optionTwoText=ansTwoText, optOneCallback=go_home, optTwoCallback=nothing)
+            ansOneText = TextObject("a. no", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+            ansTwoText = TextObject("b. yes", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+            debugChoiceMenu = DialogueWithChoice(300, bg_rect.centery + 100, buttonAssetUri=Path("assets/UI/dialog_bubble_mc.png"), questionText=questionText,
+                                                 optionOneText=ansOneText, optionTwoText=ansTwoText, optOneCallback=go_home, optTwoCallback=None)
             renderer.add_element(debugChoiceMenu)
 
         if laptop:
@@ -126,7 +127,7 @@ def go_home():
     renderer.set_elements(endingscreen.PrepareGUIElements(renderer, uiEvtManager))
 
 def nothing():
-    return
+    pass
     
 
 # def testCallback():

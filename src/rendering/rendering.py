@@ -59,6 +59,9 @@ class Renderer:
     def remove_element(self, element):
         self.elements.remove(element)
 
+    def clear(self):
+        self.elements.clear()
+
     def set_elements(self, elements):
         self.elements.clear()
         self.elements = elements
