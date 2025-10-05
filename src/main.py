@@ -2,18 +2,18 @@
 import pygame
 from scenes import titlescreen, mainscreen
 from uiElements.uiEvtManager import UiEventManager
-from singletons.singletons import GameState, renderer, uiEvtManager, game
+from singletons.singletons import GameState, renderer, uiEvtManager, game, uiManager
 
 # pygame setup
 running = True
 pygame.init()
 clock = pygame.time.Clock()
-uiEvtManager = UiEventManager()
 renderer.set_elements(titlescreen.PrepareGUIElements(renderer, uiEvtManager))
 
 
 while game.running:
     time_delta = clock.tick(60)/1000.0
+    game.input_delay += time_delta
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
     # for event in pygame.event.get():
