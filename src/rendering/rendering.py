@@ -74,6 +74,10 @@ class Renderer:
 
         if self.is_notebook_view:
             self.screen.blit(self.notebook_view, (self.x_offset, self.y_offset))
+            for element in self.elements:
+                pos = element.getPosition()
+                if (element.is_dialogue):
+                    self.notebook_view.blit(element.getSurface(), (pos[0], pos[1]))
         elif self.is_laptop_view:
             self.screen.blit(self.laptop_view, (self.x_offset, self.y_offset))
         else:

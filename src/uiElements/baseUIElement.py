@@ -9,6 +9,7 @@ class baseUIElement:
             self.image = surface
         self.position = (x, y)
         self.collideRect = None
+        self.is_dialogue = False
         if textObj != None:
             text_rect = textObj.getCompiled().get_rect()
             offset = textObj.getOffset()

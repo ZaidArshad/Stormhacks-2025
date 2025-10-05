@@ -10,6 +10,7 @@ class DialogueWithChoice(baseUIElement):
     def __init__(self, x, y, buttonAssetUri=None, surface=None, questionText : TextObject = None, optionOneText : TextObject = None, optionTwoText : TextObject = None, optionThreeText : TextObject = None, optOneCallback: any = None, optTwoCallback: any = None, optThreeCallback: any = None):
         super().__init__(x, y, buttonAssetUri, surface, questionText)
         self.btns = []
+        self.is_dialogue = True
         if optionOneText != None:
             size = optionOneText.getCompiled().get_size()
             transparent_surface = pygame.Surface((size[0] + 15, size[1] + 15), pygame.SRCALPHA)

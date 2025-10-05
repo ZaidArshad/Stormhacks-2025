@@ -6,6 +6,7 @@ class LockingButton(Button):
         super().__init__(x, y, buttonAssetUri, surface, buttonHoverAssetUri, self.execCallback, TextObject)
         # when created it should lock interface
         game.dialogue_lock = True
+        self.is_dialogue = True
         uiEvtManager.setLocking([self])
         renderer.add_element(self)
         self.callback = callback
