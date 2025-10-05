@@ -2,19 +2,17 @@
 import pygame
 from scenes import titlescreen, mainscreen
 from uiElements.uiEvtManager import UiEventManager
-from rendering.rendering import Renderer
-from singletons.singletons import gameState, GameState, renderer, running, uiEvtManager
+from singletons.singletons import GameState, renderer, uiEvtManager, game
 
 # pygame setup
 running = True
 pygame.init()
 clock = pygame.time.Clock()
-renderer = Renderer()
 uiEvtManager = UiEventManager()
 renderer.set_elements(titlescreen.PrepareGUIElements(renderer, uiEvtManager))
 
 
-while running:
+while game.running:
     time_delta = clock.tick(60)/1000.0
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
@@ -26,16 +24,14 @@ while running:
     #         if event.key == pygame.K_ESCAPE:
     #             running = False
 
-    if gameState == GameState.TITLESCREEN:
+    if game.state == GameState.TITLESCREEN:
         titlescreen.Exec()
-    elif gameState == GameState.GAME:
+    elif game.state == GameState.GAME:
         mainscreen.Exec()
-    elif gameState == GameState.ENDINGSCREEN:
+    elif game.state == GameState.ENDINGSCREEN:
         pass
 
     uiEvtManager.process()
-
-    #renderer.set_camera_offset(*pygame.mouse.get_pos())
 
     renderer.draw()
     pygame.display.flip()

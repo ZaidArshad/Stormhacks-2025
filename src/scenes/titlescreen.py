@@ -3,8 +3,9 @@ from rendering.rendering import Renderer
 from uiElements.uiEvtManager import UiEventManager
 from uiElements.button import Button
 from uiElements.baseUIElement import baseUIElement
-from singletons.singletons import running
+from singletons.singletons import game, GameState, renderer, uiEvtManager
 from pathlib import Path
+from scenes import mainscreen
 startGame = None
 closeGame = None
 
@@ -35,11 +36,12 @@ def Exec():
 
 # helper functions
 def shutdownGame():
-    global running
     print("closing game")
-    running = False
-    pygame.quit()
+    game.state = False
+    exit()
 
 def startGame():
     print("starting game")
+    game.state = GameState.GAME
+    renderer.set_elements(mainscreen.PrepareGUIElements(renderer))
 

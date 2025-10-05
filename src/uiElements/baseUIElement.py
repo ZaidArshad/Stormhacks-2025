@@ -7,6 +7,7 @@ class baseUIElement:
         elif surface != None:
             self.image = surface
         self.position = (x, y)
+        self.collideRect = None
 
     def getSurface(self):
         return self.image
