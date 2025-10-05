@@ -9,10 +9,11 @@ class Renderer:
     def __init__(self):
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.elements: list[baseUIElement] = []
-        self.bg_image = pygame.transform.scale(pygame.image.load(Path('assets/placeholder/main_bg.png')).convert(),
+        self.bg_image = pygame.transform.scale(pygame.image.load(Path('assets/final/final_bg.png')).convert(),
             (self.screen.get_width()+200, self.screen.get_height()+100))
         self.background = pygame.Surface((self.screen.get_width()+200, self.screen.get_height()+100))
 
+        self.laptop_view_num = 0
         self.laptop_view_paths = ["assets/final/zoomed_laptop_states/interaction_1_0.png",
                                   "assets/final/zoomed_laptop_states/interaction_1_1.png",
                                   "assets/final/zoomed_laptop_states/interaction_1_2.png",
@@ -24,7 +25,7 @@ class Renderer:
         self.laptop_view = pygame.transform.scale(pygame.image.load(Path(self.laptop_view_paths[0])).convert_alpha(),
                                                   (self.screen.get_width()+200, self.screen.get_height()+100))
         
-        self.notebook_view = pygame.transform.scale(pygame.image.load(Path('assets/placeholder/homeworkZoomed.png')).convert_alpha(),
+        self.notebook_view = pygame.transform.scale(pygame.image.load(Path('assets/final/final_book_zoomin.png')).convert_alpha(),
                                                   (self.screen.get_width()+200, self.screen.get_height()+100))
 
         self.fade_view = pygame.Surface(self.get_screen_size(), pygame.SRCALPHA)
@@ -91,8 +92,9 @@ class Renderer:
         self.delta_fade_opacity = 10
         self.triggered_view = "laptop"
 
-    def set_laptop_view_num(self, view_num):
-        self.laptop_view = pygame.transform.scale(pygame.image.load(Path(self.laptop_view_paths[view_num])).convert_alpha(),
+    def increment_laptop_view_num(self):
+        self.laptop_view_num += 1
+        self.laptop_view = pygame.transform.scale(pygame.image.load(Path(self.laptop_view_paths[self.laptop_view_num])).convert_alpha(),
                                                   (self.screen.get_width()+200, self.screen.get_height()+100))
 
     def fade(self):

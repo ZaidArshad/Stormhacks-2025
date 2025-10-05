@@ -14,12 +14,16 @@ player = None
 
 def laptopClick():
     print("laptop click")
-    if game.input_delay > 1:
-        if game.laptop_interaction in [0,2,3,5,6]:
+    if game.input_delay > 0.5:
+        if game.laptop_interaction in [0, 3, 4, 5, 6, 8, 9]:
             renderer.toggle_laptop_view()
-        if game.laptop_interaction not in [0,2,3,5,6]:
-            game.laptop_interaction += 1
-            renderer.set_laptop_view_num(game.laptop_interaction)
+        else:
+           renderer.increment_laptop_view_num()
+        if game.laptop_interaction in [4, 6, 9]:
+            renderer.increment_laptop_view_num()
+        if game.laptop_interaction in [3, 5, 8]:
+            player.lower_sanity(15)
+        game.laptop_interaction += 1
         game.input_delay = 0
 
 def bookClick():
@@ -38,17 +42,17 @@ def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
     ''''''
 
     global laptop, book, redbull, player
-    relpath = pathlib.Path( "assets" ) / "placeholder" 
+    relpath = pathlib.Path( "assets" ) / "final" 
     bg_rect = renderer.get_background().get_rect()
-    laptop = Button(bg_rect.left+100, bg_rect.centery-350, 
-                    buttonAssetUri= relpath / "main_laptop_base.png",
-                    buttonHoverAssetUri= relpath / "main_laptop_hover.png", callback=laptopClick)
-    book = Button(bg_rect.centerx-300, bg_rect.bottom-300, 
-                  buttonAssetUri= relpath / "main_book_base.png",
-                  buttonHoverAssetUri= relpath / "main_book_hover.png", callback=bookClick)
-    redbull = Button(bg_rect.right-500, bg_rect.centery-100, 
-                     buttonAssetUri= relpath / "main_redbull_base.png",
-                     buttonHoverAssetUri= relpath / "main_redbull_hover.png", callback=redbullClick)
+    laptop = Button(bg_rect.left+210, bg_rect.centery-300, 
+                    buttonAssetUri= relpath / "final_laptop.png",
+                    buttonHoverAssetUri= relpath / "final_laptop_hover.png", callback=laptopClick)
+    book = Button(bg_rect.centerx-200, bg_rect.centery+70, 
+                  buttonAssetUri= relpath / "final_book.png",
+                  buttonHoverAssetUri= relpath / "final_book_hover.png", callback=bookClick)
+    redbull = Button(bg_rect.centerx+500, bg_rect.centery-100, 
+                     buttonAssetUri= relpath / "final_redCow.png",
+                     buttonHoverAssetUri= relpath / "final_redCow_hover.png", callback=redbullClick)
     
     uiEvtManager.register(laptop)
     uiEvtManager.register(book)
@@ -72,6 +76,8 @@ def Exec(events : list[pygame.event.Event]):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE and not renderer.get_is_laptop_view():
                 game.running = False
+            if event.key == pygame.K_SPACE:
+                player.lower_sanity(90)
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if renderer.get_is_laptop_view():
@@ -86,7 +92,3 @@ def Exec(events : list[pygame.event.Event]):
             book.check_hovered(mouse_pos)
         if redbull:
             redbull.check_hovered(mouse_pos)
-
-        if player:
-            pass
-            player.lower_sanity(1)
