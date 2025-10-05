@@ -1,12 +1,10 @@
 import pygame
 import pathlib
 from pathlib import Path
-from singletons.singletons import game, renderer, uiEvtManager, GameState
+from singletons.singletons import game, renderer, GameState
 from rendering.rendering import Renderer
 from uiElements.uiEvtManager import UiEventManager
 from uiElements.button import Button
-from uiElements.dialogueWithChoices import DialogueWithChoice
-from uiElements.TextObject import TextObject
 from player.player import Player
 from scenes import endingscreen
 

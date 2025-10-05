@@ -17,6 +17,7 @@ class Game():
     redbull_interaction = 0
     input_delay = 0
     time_elapsed = 0
+    dialogue_lock = False
 
 game = Game()
 
