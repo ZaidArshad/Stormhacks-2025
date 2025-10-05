@@ -15,7 +15,11 @@ player = None
 def laptopClick():
     print("laptop click")
     if game.input_delay > 1:
-        renderer.toggle_laptop_view()
+        if game.laptop_interaction in [0,2,3,5,6]:
+            renderer.toggle_laptop_view()
+        if game.laptop_interaction not in [0,2,3,5,6]:
+            game.laptop_interaction += 1
+            renderer.set_laptop_view_num(game.laptop_interaction)
         game.input_delay = 0
 
 def bookClick():
