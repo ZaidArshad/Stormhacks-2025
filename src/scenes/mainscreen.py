@@ -1,12 +1,14 @@
 import pygame
 import pathlib
 from pathlib import Path
-from singletons.singletons import game, renderer, GameState
+from singletons.singletons import game, renderer, GameState, uiEvtManager
 from rendering.rendering import Renderer
 from uiElements.uiEvtManager import UiEventManager
 from uiElements.button import Button
 from player.player import Player
 from scenes import endingscreen
+from uiElements.TextObject import TextObject
+from uiElements.dialogueWithChoices import DialogueWithChoice
 
 laptop = None
 book = None
@@ -20,6 +22,9 @@ def laptopClick():
             renderer.toggle_laptop_view()
         else:
            renderer.increment_laptop_view_num()
+        if game.laptop_interaction == 10:
+            notebook_sound = pygame.mixer.Sound(Path("assets/sound_effects/windowsError.wav"))
+            notebook_sound.play()
         if game.laptop_interaction in [4, 6, 9]:
             renderer.increment_laptop_view_num()
         if game.laptop_interaction in [3, 5, 8]:
@@ -96,7 +101,7 @@ def Exec(events : list[pygame.event.Event]):
         mouse_pos = pygame.mouse.get_pos()
         renderer.set_camera_offset(*mouse_pos)
 
-        if game.time_elapsed >= 300:
+        if game.time_elapsed >= 5:
             questionText = TextObject("My battery is running low... Should I charge my laptop?", Path("assets\Tox Typewriter.ttf"), 30, (255,255,255), (200, 165))
             ansOneText = TextObject("a. yes", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
             ansTwoText = TextObject("b. no", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
@@ -113,8 +118,8 @@ def Exec(events : list[pygame.event.Event]):
 
 def go_home():
     game.state = GameState.ENDINGSCREEN
-    renderer.set_elements(endingscreen.PrepareGUIElements(renderer, uiEvtManager))
     uiEvtManager.clear()
+    renderer.set_elements(endingscreen.PrepareGUIElements(renderer, uiEvtManager))
 
 def nothing():
     pass
