@@ -3,6 +3,7 @@ from rendering.rendering import Renderer
 from uiElements.uiEvtManager import UiEventManager
 from uiElements.button import Button
 from uiElements.baseUIElement import baseUIElement
+from uiElements.TextObject import TextObject
 from singletons.singletons import game, GameState, renderer, uiEvtManager
 from pathlib import Path
 from scenes import mainscreen
@@ -35,10 +36,11 @@ def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
                           buttonHoverAssetUri= Path("assets/UI/hover/startGameHover.png"), callback=startGame)
     quit_button = Button(x_pos, y_pos+200, buttonAssetUri= Path("assets/UI/default/quitGame.png"), 
                          buttonHoverAssetUri= Path("assets/UI/hover/quitGameHover.png"), callback=shutdownGame)
+    test_button = Button(500,800, buttonAssetUri= Path("assets/placeholder/startScreen_btn_blank.png"), callback=shutdownGame, TextObject= TextObject("test", Path("assets\Tox Typewriter.ttf"), 30, (0,0,0)))
     uiEvtManager.register(start_button)
     uiEvtManager.register(quit_button)
 
-    return [background_image, start_button, quit_button]
+    return [background_image, start_button, quit_button, test_button]
 
 
 def Init():
