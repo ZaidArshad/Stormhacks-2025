@@ -1,10 +1,12 @@
 import pygame
 import pathlib
+from pathlib import Path
 from singletons.singletons import game, renderer
 from rendering.rendering import Renderer
 from uiElements.uiEvtManager import UiEventManager
 from uiElements.button import Button
-from uiElements.baseUIElement import baseUIElement
+from uiElements.dialogueWithChoices import DialogueWithChoice
+from uiElements.TextObject import TextObject
 from player.player import Player
 
 laptop = None
@@ -61,7 +63,7 @@ def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
     player = Player()
     # menu interaction btns
 
-    return [laptop, book, redbull]
+    return [laptop, book, redbull, debugChoiceMenu]
 
 
 def Init():

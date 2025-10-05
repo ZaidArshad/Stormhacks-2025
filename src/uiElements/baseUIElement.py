@@ -11,7 +11,8 @@ class baseUIElement:
         self.collideRect = None
         if textObj != None:
             text_rect = textObj.getCompiled().get_rect()
-            text_rect.topleft = (self.image.get_rect().topleft[0] + 10, self.image.get_rect().topleft[1] + 10)
+            offset = textObj.getOffset()
+            text_rect.topleft = (self.image.get_rect().topleft[0] + offset[0], self.image.get_rect().topleft[1] + offset[1])
             self.image.blit(textObj.getCompiled(), text_rect)
             # pygame.draw.rect(self.image, textObj.color, text_rect)
 
