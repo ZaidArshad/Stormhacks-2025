@@ -59,12 +59,36 @@ class Player:
         print(game.redbull_interaction)
     
     def do_homework(self):
+        if game.notebook_interaction > 3:
+            return
         bg_rect = renderer.get_background().get_rect()
         if game.notebook_interaction == 0:
             LockingButton(300, bg_rect.centery + 100, Path("assets/UI/dialog_bubble_regular.png"), TextObject= TextObject("my brain just won't process anything now. Everything's noise...", Path("assets/Tox Typewriter.ttf"), 30, (255, 255, 255), (150, 150)))
         if game.notebook_interaction == 1:    
-            pass
-        if game.notebook_interaction == 2: 
-            pass
+            questionText = TextObject("In a network of computers, a message travels along connections without repeating any connection. What is this type of path called?", Path("assets\Tox Typewriter.ttf"), 30, (255,255,255), (200, 165))
+            ansOneText = TextObject("a. Eulerian path", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+            ansTwoText = TextObject("b. Hamiltonian cycle", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+            ansThreeText = TextObject("c. Spanning tree", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+            debugChoiceMenu = DialogueWithChoice(300, bg_rect.centery+100, buttonAssetUri=Path("assets/UI/dialog_bubble_mc.png"), questionText=questionText, optionOneText=ansOneText, optionTwoText=ansTwoText, optionThreeText=ansThreeText, optOneCallback=None, optTwoCallback=None, optThreeCallback=None)
+            renderer.add_element(debugChoiceMenu)
+        elif game.notebook_interaction == 2: 
+            questionText = TextObject("Fra2lnex quibl7or shayth, dreEvo uNthak plimzor gs15ree… sn2th wivo7k?", Path("assets\Tox Typewriter.ttf"), 30, (255,255,255), (200, 165))
+            ansOneText = TextObject("a. 12", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+            ansTwoText = TextObject("b. 19", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+            debugChoiceMenu = DialogueWithChoice(300, bg_rect.centery+100, buttonAssetUri=Path("assets/UI/dialog_bubble_mc.png"), questionText=questionText, optionOneText=ansOneText, optionTwoText=ansTwoText, optOneCallback=self.macm_insanity_callback, optTwoCallback=self.minor_macm_insanity_callback)
+            renderer.add_element(debugChoiceMenu)
+        elif game.notebook_interaction == 3: 
+            questionText = TextObject("Why dont you go to sleep?", Path("assets\Tox Typewriter.ttf"), 30, (255,255,255), (200, 165))
+            ansOneText = TextObject("a. I don't know", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+            ansTwoText = TextObject("b. I can't I can't I can't I can't", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+            debugChoiceMenu = DialogueWithChoice(300, bg_rect.centery+100, buttonAssetUri=Path("assets/UI/dialog_bubble_mc.png"), questionText=questionText, optionOneText=ansOneText, optionTwoText=ansTwoText, optOneCallback=self.macm_insanity_callback, optTwoCallback=self.macm_insanity_callback)
+            renderer.add_element(debugChoiceMenu)
+
         game.notebook_interaction += 1
         print(game.notebook_interaction)        
+
+    def minor_macm_insanity_callback(self):
+        self.lower_sanity(5)
+        
+    def macm_insanity_callback(self):
+        self.lower_sanity(15)
