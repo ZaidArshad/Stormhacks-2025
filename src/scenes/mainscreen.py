@@ -14,7 +14,7 @@ player = None
 
 def laptopClick():
     print("laptop click")
-    if game.input_delay > 0.5:
+    if game.input_delay > 1:
         if game.laptop_interaction in [0, 3, 4, 5, 6, 8, 9]:
             renderer.toggle_laptop_view()
         else:
