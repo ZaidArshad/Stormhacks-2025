@@ -29,6 +29,7 @@ while game.running:
     if game.state == GameState.TITLESCREEN:
         titlescreen.Exec(input_data)
     elif game.state == GameState.GAME:
+        game.time_elapsed += time_delta
         mainscreen.Exec(input_data)
     elif game.state == GameState.ENDINGSCREEN:
         pass
