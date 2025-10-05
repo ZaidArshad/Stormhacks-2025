@@ -16,6 +16,7 @@ class Game():
     notebook_interaction = 0
     redbull_interaction = 0
     input_delay = 0
+    time_elapsed = 0
 
 game = Game()
 

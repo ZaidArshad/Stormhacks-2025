@@ -1,6 +1,6 @@
 # Example file showing a basic pygame "game loop"
 import pygame
-from scenes import titlescreen, mainscreen
+from scenes import titlescreen, mainscreen, endingscreen
 from singletons.singletons import GameState, renderer, uiEvtManager, game, uiManager
 
 # pygame setup
@@ -28,9 +28,10 @@ while game.running:
     if game.state == GameState.TITLESCREEN:
         titlescreen.Exec(input_data)
     elif game.state == GameState.GAME:
+        game.time_elapsed += time_delta
         mainscreen.Exec(input_data)
     elif game.state == GameState.ENDINGSCREEN:
-        pass
+        endingscreen.Exec(input_data)
 
     uiEvtManager.process(input_data)
 

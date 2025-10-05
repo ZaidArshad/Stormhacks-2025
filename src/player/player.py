@@ -14,8 +14,8 @@ class Player:
 
         if self.sanity <= 85 and not self.hallucination[1]:
             self.hallucination[1] = True
-            pygame.mixer.music.load(Path("assets/sound_effects/bookDropping.wav"))
-            pygame.mixer.music.play()
+            book_dropping_sound = pygame.mixer.Sound(Path("assets/sound_effects/bookDropping.wav"))
+            book_dropping_sound.play()
         if self.sanity <= 75 and not self.hallucination[2]:
             self.hallucination[2] = True
             blood = baseUIElement(bg_rect.centerx-100, bg_rect.centery+100, surface= pygame.image.load(Path('assets/final/final_san75_overlay.png')).convert_alpha())
@@ -36,10 +36,12 @@ class Player:
             renderer.add_element(red_aura)
         if self.sanity <= 0:
             game.state = GameState.ENDINGSCREEN
+        print(self.sanity)
 
     def drink_redbull(self):
-        if game.redbull_interaction == 0:
-            pass
+        redbull_sound = pygame.mixer.Sound(Path("assets/sound_effects/drinkRedbull.wav"))
+        if game.redbull_interaction < 3:
+            redbull_sound.play()
         if game.redbull_interaction == 1:
             self.lower_sanity(5)
         if game.redbull_interaction == 2:

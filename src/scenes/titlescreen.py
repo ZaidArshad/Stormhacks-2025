@@ -22,7 +22,11 @@ def startGame():
     print("starting game")
     game.state = GameState.GAME
     game.input_delay = 0
+    uiEvtManager.clear()
     renderer.set_elements(mainscreen.PrepareGUIElements(renderer, uiEvtManager))
+    pygame.mixer.music.load(Path("assets/sound_effects/backgroundNoise.wav"))
+    pygame.mixer.music.set_volume(20)
+    pygame.mixer.music.play()
 
 def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
     ''''''
