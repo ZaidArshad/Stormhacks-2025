@@ -1,4 +1,4 @@
-from enum import Enum, auto
+from enum import Enum
 # screen size
 screenX = 1920
 screenY = 1080
@@ -9,4 +9,10 @@ class GameState(Enum):
     GAME = 2
     ENDINGSCREEN = 3
 
-gameState = GameState.TITLESCREEN
+gameState = GameState.GAME
+
+uiManager = None
+
+renderer = None
+
+running = False

@@ -1,12 +1,33 @@
 import pygame
-from singletons.singletons import screenX, screenY
+import pygame_gui
+from rendering.rendering import Renderer
+from uiElements.button import Button
+from uiElements.baseUIElement import baseUIElement
+from singletons.singletons import running
 
-screen = pygame.display.set_mode((screenX, screenY))
-def init():
+startGame = None
+closeGame = None
+
+def PrepareGUIElements(renderer: Renderer):
     ''''''
-    original_image = pygame.image.load('assets\placeholder\startScreen_bg.png').convert()
+    global startGame, closeGame
+    screen_size = renderer.get_screen_size()
+    original_image = pygame.image.load('assets/placeholder/startScreen_bg.png').convert()
+    background_image =  baseUIElement(0,0, surface= pygame.transform.scale(original_image, screen_size))
+    start_button = Button(500, 450, buttonAssetUri= "assets/placeholder/startScreen_btn_play.png")
+    quit_button = Button(500, 650, buttonAssetUri= "assets/placeholder/startScreen_btn_quit.png")
+    # menu interaction btns
 
-    # Scale the image to match the screen size exactly
-    background_image = pygame.transform.scale(original_image, (screenX,screenY))
-    screen.blit(background_image, (0, 0))
 
+    return [background_image, start_button, quit_button]
+
+
+def Init():
+    ''''''
+
+def Exec():
+    ''''''
+    global running
+    for event in pygame.event.get():
+        if event.type == pygame_gui.UI_BUTTON_PRESSED:
+            pass

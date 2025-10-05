@@ -1,33 +1,39 @@
 # Example file showing a basic pygame "game loop"
 import pygame
-from scenes import titlescreen
-from singletons.singletons import screenX, screenY, gameState, GameState, renderer
+from scenes import titlescreen, mainscreen
+from rendering.rendering import Renderer
+from singletons.singletons import gameState, GameState, renderer, running
 
 # pygame setup
-pygame.init()
-screen = pygame.display.set_mode((screenX, screenY))
-clock = pygame.time.Clock()
 running = True
+pygame.init()
+clock = pygame.time.Clock()
+renderer = Renderer()
+renderer.set_elements(mainscreen.PrepareGUIElements(renderer))
 
 while running:
+    time_delta = clock.tick(60)/1000.0
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    # RENDER YOUR GAME HERE
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                running = False
+
     if gameState == GameState.TITLESCREEN:
-        titlescreen.init()
+        titlescreen.Exec()
     elif gameState == GameState.GAME:
-        pass
+        mainscreen.Exec()
     elif gameState == GameState.ENDINGSCREEN:
         pass
 
-    renderer.draw()
+    renderer.set_camera_offset(*pygame.mouse.get_pos())
 
-    # flip() the display to put your work on screen
-    pygame.display.flip()
+    renderer.draw()
+    pygame.display.update()
 
     clock.tick(60)  # limits FPS to 60
 
