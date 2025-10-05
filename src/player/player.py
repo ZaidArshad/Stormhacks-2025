@@ -16,7 +16,8 @@ class Player:
             pass
         if self.sanity <= 85 and not self.hallucination[1]:
             self.hallucination[1] = True
-            # book sound
+            pygame.mixer.music.load(Path("assets/sound_effects/bookDropping.wav"))
+            pygame.mixer.music.play()
         if self.sanity <= 75 and not self.hallucination[2]:
             self.hallucination[2] = True
             # strange words on notes

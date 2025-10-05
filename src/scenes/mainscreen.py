@@ -56,5 +56,5 @@ def Exec(events : list[pygame.event.Event]):
             redbull.check_hovered(mouse_pos)
 
         if player:
+            player.lower_sanity(1)
             pass
-            # player.lower_sanity(1)
