@@ -27,7 +27,7 @@ def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
     ''''''
     global start_button, quit_button
     screen_size = renderer.get_screen_size()
-    original_image = pygame.image.load(Path('assets/placeholder/startScreen_bg.png')).convert()
+    original_image = pygame.image.load(Path('assets/final/title.png')).convert()
     background_image =  baseUIElement(0,0, surface= pygame.transform.scale(original_image, screen_size))
 
     original_image = pygame.image.load(Path('assets/UI/default/startGame.png')).convert()
