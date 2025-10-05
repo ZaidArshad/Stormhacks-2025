@@ -21,6 +21,7 @@ def laptopClick():
            renderer.increment_laptop_view_num()
         if game.laptop_interaction in [4, 6, 9]:
             renderer.increment_laptop_view_num()
+        if game.laptop_interaction in [3, 5, 8]:
             player.lower_sanity(15)
         game.laptop_interaction += 1
         game.input_delay = 0
@@ -43,7 +44,7 @@ def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
     global laptop, book, redbull, player
     relpath = pathlib.Path( "assets" ) / "final" 
     bg_rect = renderer.get_background().get_rect()
-    laptop = Button(bg_rect.left+350, bg_rect.centery-300, 
+    laptop = Button(bg_rect.left+210, bg_rect.centery-300, 
                     buttonAssetUri= relpath / "final_laptop.png",
                     buttonHoverAssetUri= relpath / "final_laptop_hover.png", callback=laptopClick)
     book = Button(bg_rect.centerx-200, bg_rect.centery+70, 
@@ -75,6 +76,8 @@ def Exec(events : list[pygame.event.Event]):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE and not renderer.get_is_laptop_view():
                 game.running = False
+            if event.key == pygame.K_SPACE:
+                player.lower_sanity(90)
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if renderer.get_is_laptop_view():

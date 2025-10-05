@@ -25,7 +25,7 @@ class Renderer:
         self.laptop_view = pygame.transform.scale(pygame.image.load(Path(self.laptop_view_paths[0])).convert_alpha(),
                                                   (self.screen.get_width()+200, self.screen.get_height()+100))
         
-        self.notebook_view = pygame.transform.scale(pygame.image.load(Path('assets/placeholder/homeworkZoomed.png')).convert_alpha(),
+        self.notebook_view = pygame.transform.scale(pygame.image.load(Path('assets/final/final_book_zoomin.png')).convert_alpha(),
                                                   (self.screen.get_width()+200, self.screen.get_height()+100))
 
         self.fade_view = pygame.Surface(self.get_screen_size(), pygame.SRCALPHA)
