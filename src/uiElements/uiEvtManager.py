@@ -13,8 +13,10 @@ class UiEventManager:
 
     def process(self, events: list[pygame.event.Event]):
         for event in events:
+            pos = pygame.mouse.get_pos()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
                 for uielement in self.activeUIElements:
                     if uielement.is_clicked(pos): 
                         uielement.execCallback()
+            for uielement in self.activeUIElements:          
+                uielement.check_hovered(pos)
