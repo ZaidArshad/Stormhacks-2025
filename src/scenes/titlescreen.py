@@ -4,7 +4,7 @@ from uiElements.uiEvtManager import UiEventManager
 from uiElements.button import Button
 from uiElements.baseUIElement import baseUIElement
 from uiElements.TextObject import TextObject
-from singletons.singletons import game, GameState, renderer
+from singletons.singletons import game, GameState, renderer, uiEvtManager
 from pathlib import Path
 from scenes import mainscreen
 
