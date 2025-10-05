@@ -9,7 +9,7 @@ class Renderer:
     def __init__(self):
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.elements: list[baseUIElement] = []
-        self.bg_image = pygame.transform.scale(pygame.image.load(Path('assets/placeholder/main_bg.png')).convert(),
+        self.bg_image = pygame.transform.scale(pygame.image.load(Path('assets/final/final_bg.png')).convert(),
             (self.screen.get_width()+200, self.screen.get_height()+100))
         self.background = pygame.Surface((self.screen.get_width()+200, self.screen.get_height()+100))
 
