@@ -108,10 +108,10 @@ def Exec(events : list[pygame.event.Event]):
         if game.time_elapsed >= 5:
             bg_rect = renderer.get_background().get_rect()
             questionText = TextObject("My battery is running low... Should I charge my laptop?", Path("assets\Tox Typewriter.ttf"), 30, (255,255,255), (200, 165))
-            ansOneText = TextObject("a. yes", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
-            ansTwoText = TextObject("b. no", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+            ansOneText = TextObject("a. no", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
+            ansTwoText = TextObject("b. yes", Path("assets\Tox Typewriter.ttf"), 24, (255,255,255))
             debugChoiceMenu = DialogueWithChoice(300, bg_rect.centery + 100, buttonAssetUri=Path("assets/UI/dialog_bubble_mc.png"), questionText=questionText,
-                                                 optionOneText=ansOneText, optionTwoText=ansTwoText, optOneCallback=nothing, optTwoCallback=go_home)
+                                                 optionOneText=ansOneText, optionTwoText=ansTwoText, optOneCallback=go_home, optTwoCallback=None)
             renderer.add_element(debugChoiceMenu)
 
         if laptop:
