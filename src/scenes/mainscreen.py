@@ -23,7 +23,8 @@ def PrepareGUIElements(renderer: Renderer):
     redbull = Button(bg_rect.right-500, bg_rect.centery-100, 
                      buttonAssetUri= relpath / "main_redbull_base.png",
                      buttonHoverAssetUri= relpath / "main_redbull_hover.png")
-    # menu interaction btns
+    
+    
 
     return [laptop, book, redbull]
 
