@@ -1,10 +1,12 @@
 import pygame
 import pathlib
 from pathlib import Path
-from singletons.singletons import game, renderer, GameState
+from singletons.singletons import game, renderer, GameState, uiEvtManager
 from rendering.rendering import Renderer
 from uiElements.uiEvtManager import UiEventManager
 from uiElements.button import Button
+from uiElements.TextObject import TextObject
+from uiElements.dialogueWithChoices import DialogueWithChoice
 from player.player import Player
 from scenes import endingscreen
 
@@ -121,10 +123,10 @@ def nothing():
     
 
 # def testCallback():
-#     print("1")
+#      print("1")
 
 # def testCallback2():
-#     print("2")
+#      print("2")
 
 # def testCallback3():
-#     print("3")
+#      print("3")
