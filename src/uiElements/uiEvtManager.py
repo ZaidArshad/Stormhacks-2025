@@ -11,8 +11,8 @@ class UiEventManager:
     def clear(self):
         self.activeUIElements.clear()
 
-    def process(self):
-        for event in pygame.event.get():
+    def process(self, events: list[pygame.event.Event]):
+        for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 for uielement in self.activeUIElements:

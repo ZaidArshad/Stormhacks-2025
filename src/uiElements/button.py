@@ -1,9 +1,10 @@
 import pygame
 from uiElements.baseUIElement import baseUIElement
+from uiElements.TextObject import TextObject
 
 class Button(baseUIElement):
-    def __init__(self, x, y,  buttonAssetUri:str, buttonHoverAssetUri:str = "", callback: any = None):
-        super().__init__(x, y, buttonAssetUri = buttonAssetUri)
+    def __init__(self, x, y,  buttonAssetUri:str, buttonHoverAssetUri:str = "", callback: any = None, TextObject: TextObject = None):
+        super().__init__(x, y, buttonAssetUri = buttonAssetUri, textObj=TextObject)
         self.baseImage = pygame.image.load(buttonAssetUri).convert_alpha()
 
         self.hoveredImage = None
