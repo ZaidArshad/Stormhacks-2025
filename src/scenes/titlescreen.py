@@ -15,6 +15,7 @@ quit_button = None
 def shutdownGame():
     print("closing game")
     game.state = False
+    pygame.quit()
     exit()
 
 def startGame():
@@ -30,36 +31,35 @@ def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
     background_image =  baseUIElement(0,0, surface= pygame.transform.scale(original_image, screen_size))
 
     original_image = pygame.image.load(Path('assets/UI/default/startGame.png')).convert()
-    x_pos = screen_size[0]//2 - original_image.width//2
-    y_pos = screen_size[1]//2 - original_image.height//2
+    x_pos = screen_size[0]//2 - original_image.get_width()//2
+    y_pos = screen_size[1]//2 - original_image.get_height()//2
     start_button = Button(x_pos, y_pos, buttonAssetUri= Path("assets/UI/default/startGame.png"), 
                           buttonHoverAssetUri= Path("assets/UI/hover/startGameHover.png"), callback=startGame)
     quit_button = Button(x_pos, y_pos+200, buttonAssetUri= Path("assets/UI/default/quitGame.png"), 
                          buttonHoverAssetUri= Path("assets/UI/hover/quitGameHover.png"), callback=shutdownGame)
-    test_button = Button(500,800, buttonAssetUri= Path("assets/placeholder/startScreen_btn_blank.png"), callback=shutdownGame, TextObject= TextObject("test", Path("assets\Tox Typewriter.ttf"), 30, (0,0,0)))
+    # test_button = Button(500,800, buttonAssetUri= Path("assets/placeholder/startScreen_btn_blank.png"), callback=shutdownGame, TextObject= TextObject("test", Path("assets\Tox Typewriter.ttf"), 30, (0,0,0)))
     uiEvtManager.register(start_button)
     uiEvtManager.register(quit_button)
 
-    return [background_image, start_button, quit_button, test_button]
+    return [background_image, start_button, quit_button]
 
 
 def Init():
     ''''''
 
-def Exec():
+def Exec(events : list[pygame.event.Event]):
     ''''''
-    for event in pygame.event.get():
+    for event in events:
         if event.type == pygame.QUIT:
             game.running = False
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                game.running = False
+               game.running = False
 
-        mouse_pos = pygame.mouse.get_pos()
-        if start_button:
-            start_button.check_hovered(mouse_pos)
-        if quit_button:
-            quit_button.check_hovered(mouse_pos)
-
+            mouse_pos = pygame.mouse.get_pos()
+            if start_button:
+                start_button.check_hovered(mouse_pos)
+            if quit_button:
+                quit_button.check_hovered(mouse_pos)
 

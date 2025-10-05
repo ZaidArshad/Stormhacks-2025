@@ -24,14 +24,16 @@ while game.running:
     #         if event.key == pygame.K_ESCAPE:
     #             running = False
 
+    input_data = pygame.event.get()
+
     if game.state == GameState.TITLESCREEN:
-        titlescreen.Exec()
+        titlescreen.Exec(input_data)
     elif game.state == GameState.GAME:
-        mainscreen.Exec()
+        mainscreen.Exec(input_data)
     elif game.state == GameState.ENDINGSCREEN:
         pass
 
-    uiEvtManager.process()
+    uiEvtManager.process(input_data)
 
     renderer.draw()
     pygame.display.flip()
