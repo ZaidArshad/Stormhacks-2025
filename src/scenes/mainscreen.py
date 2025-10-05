@@ -1,5 +1,4 @@
 import pygame
-import pygame_gui
 import pathlib
 from rendering.rendering import Renderer
 from uiElements.button import Button

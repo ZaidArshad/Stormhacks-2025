@@ -1,5 +1,4 @@
 import pygame
-import pygame_gui
 from rendering.rendering import Renderer
 from uiElements.button import Button
 from uiElements.baseUIElement import baseUIElement
