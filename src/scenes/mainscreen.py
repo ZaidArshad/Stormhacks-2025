@@ -4,14 +4,16 @@ from singletons.singletons import game, renderer
 from rendering.rendering import Renderer
 from uiElements.button import Button
 from uiElements.baseUIElement import baseUIElement
+from player.player import Player
 
 laptop = None
 book = None
 redbull = None
+player = None
 
 def PrepareGUIElements(renderer: Renderer):
     ''''''
-    global laptop, book, redbull
+    global laptop, book, redbull, player
     relpath = pathlib.Path( "assets" ) / "placeholder" 
     bg_rect = renderer.get_background().get_rect()
     laptop = Button(bg_rect.left+100, bg_rect.centery-350, 
@@ -23,6 +25,8 @@ def PrepareGUIElements(renderer: Renderer):
     redbull = Button(bg_rect.right-500, bg_rect.centery-100, 
                      buttonAssetUri= relpath / "main_redbull_base.png",
                      buttonHoverAssetUri= relpath / "main_redbull_hover.png")
+    
+    player = Player()
     # menu interaction btns
 
     return [laptop, book, redbull]
@@ -50,3 +54,7 @@ def Exec(events : list[pygame.event.Event]):
             book.check_hovered(mouse_pos)
         if redbull:
             redbull.check_hovered(mouse_pos)
+
+        if player:
+            pass
+            # player.lower_sanity(1)

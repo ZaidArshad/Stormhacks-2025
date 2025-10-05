@@ -10,6 +10,10 @@ class GameState(Enum):
 class Game():
     state = GameState.TITLESCREEN
     running = True
+    sanity = 100
+    laptop_interaction = 0
+    notebook_interaction = 0
+    redbull_interaction = 0
 
 game = Game()
 
