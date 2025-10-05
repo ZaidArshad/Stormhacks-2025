@@ -76,8 +76,6 @@ def Exec(events : list[pygame.event.Event]):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE and not renderer.get_is_laptop_view():
                 game.running = False
-            if event.key == pygame.K_SPACE:
-                player.lower_sanity(90)
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if renderer.get_is_laptop_view():
