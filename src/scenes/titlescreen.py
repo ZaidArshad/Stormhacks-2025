@@ -57,9 +57,9 @@ def Exec(events : list[pygame.event.Event]):
             if event.key == pygame.K_ESCAPE:
                game.running = False
 
-            mouse_pos = pygame.mouse.get_pos()
-            if start_button:
-                start_button.check_hovered(mouse_pos)
-            if quit_button:
-                quit_button.check_hovered(mouse_pos)
+        mouse_pos = pygame.mouse.get_pos()
+        if start_button:
+            start_button.check_hovered(mouse_pos)
+        if quit_button:
+            quit_button.check_hovered(mouse_pos)
 
