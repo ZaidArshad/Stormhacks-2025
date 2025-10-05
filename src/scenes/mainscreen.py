@@ -14,12 +14,15 @@ player = None
 
 def laptopClick():
     print("laptop click")
-    if game.input_delay > 1:
-        if game.laptop_interaction in [0,2,3,5,6]:
+    if game.input_delay > 0.5:
+        if game.laptop_interaction in [0, 3, 4, 5, 6, 8, 9]:
             renderer.toggle_laptop_view()
-        if game.laptop_interaction not in [0,2,3,5,6]:
-            game.laptop_interaction += 1
-            renderer.set_laptop_view_num(game.laptop_interaction)
+        else:
+           renderer.increment_laptop_view_num()
+        if game.laptop_interaction in [4, 6, 9]:
+            renderer.increment_laptop_view_num()
+            player.lower_sanity(15)
+        game.laptop_interaction += 1
         game.input_delay = 0
 
 def bookClick():
@@ -86,7 +89,3 @@ def Exec(events : list[pygame.event.Event]):
             book.check_hovered(mouse_pos)
         if redbull:
             redbull.check_hovered(mouse_pos)
-
-        if player:
-            pass
-            player.lower_sanity(1)
