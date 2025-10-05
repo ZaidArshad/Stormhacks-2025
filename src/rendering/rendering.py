@@ -11,9 +11,9 @@ class Renderer:
     def __init__(self):
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.elements: list[baseUIElement] = []
-        self.background = pygame.transform.scale( 
-            pygame.image.load('assets/placeholder/main_bg.png').convert(),
+        self.bg_image = pygame.transform.scale(pygame.image.load('assets/placeholder/main_bg.png').convert(),
             (self.screen.get_width()+200, self.screen.get_height()+100))
+        self.background = pygame.Surface((self.screen.get_width()+200, self.screen.get_height()+100))
 
         self.laptop_view = pygame.Surface((self.screen.get_width()-LAPTOP_VIEW_MARGIN_X, 
                                           self.screen.get_height()-LAPTOP_VIEW_MARGIN_Y))
@@ -55,6 +55,7 @@ class Renderer:
         if self.is_laptop_view:
             self.screen.blit(self.laptop_view, (self.x_offset+LAPTOP_VIEW_MARGIN_X/2, self.y_offset+LAPTOP_VIEW_MARGIN_Y/2))
         else:
+            self.background.blit(self.bg_image, (0, 0))
             for element in self.elements:
                 pos = element.getPosition()
                 self.background.blit(element.getSurface(), (pos[0], pos[1]))
