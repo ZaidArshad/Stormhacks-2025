@@ -37,10 +37,10 @@ def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
 
     original_image = pygame.image.load(Path('assets/UI/default/startGame.png')).convert()
     x_pos = screen_size[0]//2 - original_image.get_width()//2
-    y_pos = screen_size[1]//2 - original_image.get_height()//2
+    y_pos = screen_size[1]//2 - original_image.get_height()//2 + 100
     start_button = Button(x_pos, y_pos, buttonAssetUri= Path("assets/UI/default/startGame.png"), 
                           buttonHoverAssetUri= Path("assets/UI/hover/startGameHover.png"), callback=startGame)
-    quit_button = Button(x_pos, y_pos+200, buttonAssetUri= Path("assets/UI/default/quitGame.png"), 
+    quit_button = Button(x_pos, y_pos+100, buttonAssetUri= Path("assets/UI/default/quitGame.png"), 
                          buttonHoverAssetUri= Path("assets/UI/hover/quitGameHover.png"), callback=shutdownGame)
     uiEvtManager.register(start_button)
     uiEvtManager.register(quit_button)
