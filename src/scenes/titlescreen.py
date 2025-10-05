@@ -4,7 +4,7 @@ from uiElements.uiEvtManager import UiEventManager
 from uiElements.button import Button
 from uiElements.baseUIElement import baseUIElement
 from uiElements.TextObject import TextObject
-from singletons.singletons import game, GameState, renderer, uiEvtManager
+from singletons.singletons import game, GameState, renderer
 from pathlib import Path
 from scenes import mainscreen
 
@@ -62,4 +62,3 @@ def Exec(events : list[pygame.event.Event]):
             start_button.check_hovered(mouse_pos)
         if quit_button:
             quit_button.check_hovered(mouse_pos)
-
