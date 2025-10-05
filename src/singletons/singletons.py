@@ -1,5 +1,6 @@
 from enum import Enum
 from rendering.rendering import Renderer 
+from uiElements.uiEvtManager import UiEventManager
 
 class GameState(Enum):
     TITLESCREEN = 1
@@ -21,4 +22,4 @@ uiManager = None
 
 renderer = Renderer()
 
-uiEvtManager = None
+uiEvtManager = UiEventManager()

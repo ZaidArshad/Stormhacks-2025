@@ -2,13 +2,12 @@
 import pygame
 from scenes import titlescreen, mainscreen
 from uiElements.uiEvtManager import UiEventManager
-from singletons.singletons import GameState, renderer, uiEvtManager, game
+from singletons.singletons import GameState, renderer, uiEvtManager, game, uiManager
 
 # pygame setup
 running = True
 pygame.init()
 clock = pygame.time.Clock()
-uiEvtManager = UiEventManager()
 renderer.set_elements(titlescreen.PrepareGUIElements(renderer, uiEvtManager))
 
 

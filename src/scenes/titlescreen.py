@@ -21,7 +21,7 @@ def shutdownGame():
 def startGame():
     print("starting game")
     game.state = GameState.GAME
-    renderer.set_elements(mainscreen.PrepareGUIElements(renderer))
+    renderer.set_elements(mainscreen.PrepareGUIElements(renderer, uiEvtManager))
 
 def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
     ''''''
