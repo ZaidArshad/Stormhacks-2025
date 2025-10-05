@@ -16,8 +16,11 @@ def PrepareGUIElements(renderer: Renderer, uiEvtManager: UiEventManager):
     original_image = pygame.image.load(Path('assets/placeholder/startScreen_bg.png')).convert()
     background_image =  baseUIElement(0,0, surface= pygame.transform.scale(original_image, screen_size))
 
-    start_button = Button(500, 450, buttonAssetUri= Path("assets/placeholder/startScreen_btn_play.png"), callback=startGame)
-    quit_button = Button(500, 650, buttonAssetUri= Path("assets/placeholder/startScreen_btn_quit.png"), callback=shutdownGame)
+    original_image = pygame.image.load(Path('assets/placeholder/startScreen_btn_play.png')).convert()
+    x_pos = screen_size[0]//2 - original_image.width//2
+    y_pos = screen_size[1]//2 - original_image.height//2
+    start_button = Button(x_pos, y_pos, buttonAssetUri= Path("assets/placeholder/startScreen_btn_play.png"), callback=startGame)
+    quit_button = Button(x_pos, y_pos+200, buttonAssetUri= Path("assets/placeholder/startScreen_btn_quit.png"), callback=shutdownGame)
     uiEvtManager.register(start_button)
     uiEvtManager.register(quit_button)
 
