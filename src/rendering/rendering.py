@@ -36,6 +36,7 @@ class Renderer:
         self.x_offset = (self.background.get_width()//2-mouse_x)/OFFSET_X_SCALE - 100
         self.y_offset = (self.background.get_height()//2-mouse_y)/OFFSET_Y_SCALE - 50
 
+
     def add_element(self, element):
         self.elements.append(element)
 
@@ -59,8 +60,11 @@ class Renderer:
             for element in self.elements:
                 pos = element.getPosition()
                 self.background.blit(element.getSurface(), (pos[0], pos[1]))
+                if (element.collideRect):
+                    element.collideRect[0] = pos[0]+self.x_offset
+                    element.collideRect[1] = pos[1]+self.y_offset
             self.screen.blit(self.background, (self.x_offset, self.y_offset))
-
+            
         if self.delta_fade_opacity != 0:
             self.fade()
             return

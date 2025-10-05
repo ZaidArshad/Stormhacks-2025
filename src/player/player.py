@@ -1,4 +1,4 @@
-from singletons.singletons import gameState, GameState
+from singletons.singletons import game, GameState
 
 class Player:
     def __init__(self):
@@ -7,7 +7,7 @@ class Player:
     def lower_sanity(self, delta):
         self.sanity -= delta
         if (self.sanity <= 0):
-            gameState = gameState
+            game.state = GameState.ENDINGSCREEN
 
     
     
