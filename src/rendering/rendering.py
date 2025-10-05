@@ -1,4 +1,5 @@
 import pygame
+from uiElements.baseUIElement import baseUIElement
 import math
 
 OFFSET_X_SCALE = 4
@@ -9,7 +10,7 @@ LAPTOP_VIEW_MARGIN_Y = 100
 class Renderer:
     def __init__(self):
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-        self.elements = []
+        self.elements: list[baseUIElement] = []
         self.background = pygame.Surface(self.get_screen_size())
         self.background.fill("red")
 
@@ -37,6 +38,13 @@ class Renderer:
     def add_element(self, element):
         self.elements.append(element)
 
+    def set_elements(self, elements):
+        self.elements.clear()
+        self.elements = elements
+
+    def get_screen(self):
+        return self.screen
+
     def draw(self):
         self.screen.fill("black")
 
@@ -44,7 +52,8 @@ class Renderer:
             self.screen.blit(self.laptop_view, (self.x_offset+LAPTOP_VIEW_MARGIN_X/2, self.y_offset+LAPTOP_VIEW_MARGIN_Y/2))
         else:
             for element in self.elements:
-                self.background.blit(element, (0, 0))
+                pos = element.getPosition()
+                self.background.blit(element.getSurface(), (pos[0], pos[1]))
             self.screen.blit(self.background, (self.x_offset, self.y_offset))
 
         if self.delta_fade_opacity != 0:
