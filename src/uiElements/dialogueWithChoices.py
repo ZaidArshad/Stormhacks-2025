@@ -48,7 +48,6 @@ class DialogueWithChoice(baseUIElement):
 
         uiEvtManager.setLocking(self.btns)
         game.dialogue_lock = True
-        renderer.add_element(self)
         
     def unlockCallback(self):
         game.dialogue_lock = False
